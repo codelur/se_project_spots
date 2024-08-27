@@ -8,4 +8,6 @@
 .footer__copyright {
   margin: auto;
   line-height: 16px;
+  opacity: 70%;
+  font-weight: 400;
 }
