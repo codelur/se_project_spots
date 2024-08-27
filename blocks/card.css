@@ -36,7 +36,7 @@
   background-image: url(../images/heart.svg);
   background-repeat: no-repeat;
   background-position: center;
-  background-size: cover;
+  background-size: contain;
   opacity: 40%;
   transition: opacity 0.3s ease;
 }
