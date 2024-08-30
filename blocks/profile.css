@@ -10,6 +10,7 @@
   height: 190px;
   width: 190px;
   border-radius: 8px;
+  object-fit: cover;
 }
 
 .profile__name {
@@ -22,6 +23,7 @@
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+  max-width: 420px;
 }
 
 .profile__description {
@@ -33,6 +35,7 @@
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+  max-width: 420px;
 }
 
 .profile__column {
@@ -52,6 +55,7 @@
   line-height: 16px;
   transition: opacity 0.3s ease;
   font-weight: 500;
+  cursor: pointer;
 }
 
 .profile__edit-btn:hover {
@@ -69,6 +73,7 @@
   color: white;
   line-height: 16px;
   transition: background-color 0.5s ease;
+  cursor: pointer;
 }
 
 .profile__add-btn:hover {
