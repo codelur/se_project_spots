@@ -6,6 +6,8 @@
 
 The project is live and accessible at [Spots Website](https://codelur.github.io/se_project_spots/).
 
+Video description: https://drive.google.com/file/d/1Zsg1AKEOoSQWthCkEDXmkKC9A5HOeQOJ/view?usp=drive_link
+
 ## Features
 
 - **User Interactions**:
