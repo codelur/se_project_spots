@@ -24,3 +24,18 @@ const initialCards = [
     link: "https://images.unsplash.com/photo-1641646936155-c703e5d84b99?q=80&w=2022&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
 ];
+
+function openEditProfileModal() {
+  editProfileModal.classList.add("modal__opened");
+}
+
+function closeEditProfileModal() {
+  editProfileModal.classList.remove("modal__opened");
+}
+
+const editProfileModal = document.querySelector("#edit-profile-modal");
+const editProfileButton = document.querySelector(".profile__edit-btn");
+const closeEditProfileButton = document.querySelector(".modal__close-btn");
+
+editProfileButton.addEventListener("click", openEditProfileModal);
+closeEditProfileButton.addEventListener("click", closeEditProfileModal);
