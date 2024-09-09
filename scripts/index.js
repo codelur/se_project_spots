@@ -25,7 +25,22 @@ const initialCards = [
   },
 ];
 
+const profileSectionElement = document.querySelector(".profile__column");
+
+const profileNameElement =
+  profileSectionElement.querySelector(".profile__name");
+const profileJobElement = profileSectionElement.querySelector(
+  ".profile__description"
+);
+
+const profileFormElement = document.querySelector("#edit-profile-modal");
+
+const nameInput = profileFormElement.querySelector("#name");
+const jobInput = profileFormElement.querySelector("#description");
+
 function openEditProfileModal() {
+  nameInput.value = profileNameElement.textContent;
+  jobInput.value = profileJobElement.textContent;
   editProfileModal.classList.add("modal__opened");
 }
 
@@ -33,9 +48,21 @@ function closeEditProfileModal() {
   editProfileModal.classList.remove("modal__opened");
 }
 
+function handleProfileFormSubmit(evt) {
+  evt.preventDefault();
+  profileNameElement.textContent = nameInput.value;
+  profileJobElement.textContent = jobInput.value;
+  closeEditProfileModal();
+}
+
 const editProfileModal = document.querySelector("#edit-profile-modal");
 const editProfileButton = document.querySelector(".profile__edit-btn");
 const closeEditProfileButton = document.querySelector(".modal__close-btn");
+const submitProfileForm = profileFormElement.querySelector(
+  "#modal__form-edit-profile"
+);
 
 editProfileButton.addEventListener("click", openEditProfileModal);
 closeEditProfileButton.addEventListener("click", closeEditProfileModal);
+//Add this eventListener to the form instead of the button
+submitProfileForm.addEventListener("submit", handleProfileFormSubmit);
