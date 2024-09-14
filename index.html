@@ -23,13 +23,23 @@
             class="profile__avatar"
           />
           <div class="profile__column">
-            <h1 class="profile__name">Bessie Coleman</h1>
-            <p class="profile__description">Civil Aviator</p>
-            <button type="button" class="profile__edit-btn">
+            <h1 id="profile__name" class="profile__name">Bessie Coleman</h1>
+            <p id="profile__description" class="profile__description">
+              Civil Aviator
+            </p>
+            <button
+              type="button"
+              id="profile__edit-btn"
+              class="profile__edit-btn"
+            >
               <img src="./images/pencil.svg" alt="Pencil icon" />Edit profile
             </button>
           </div>
-          <button type="button" class="profile__add-btn">
+          <button
+            type="button"
+            id="profile__add-card-btn"
+            class="profile__add-card-btn"
+          >
             <img src="./images/plus.svg" alt="Plus icon" />New Post
           </button>
         </section>
@@ -52,7 +62,11 @@
       </footer>
       <div class="modal" id="edit-profile-modal">
         <div class="modal__container">
-          <button type="submit" class="modal__close-btn"></button>
+          <button
+            type="submit"
+            id="modal__edit-profile-close-btn"
+            class="modal__close-btn"
+          ></button>
           <h2 class="modal__title">Edit Profile</h2>
           <form
             name="edit-profile"
@@ -75,6 +89,37 @@
                 type="text"
                 class="modal__input"
                 placeholder="Describe yourself"
+              />
+            </label>
+            <button type="submit" class="modal__submit-btn">Save</button>
+          </form>
+        </div>
+      </div>
+      <div class="modal" id="add-card-modal">
+        <div class="modal__container">
+          <button
+            type="button"
+            id="modal__add-card-close-btn"
+            class="modal__close-btn"
+          ></button>
+          <h2 class="modal__title">New Post</h2>
+          <form name="add-card" class="modal__form" id="modal__form-add-card">
+            <label for="image-link" class="modal__label"
+              >Image Link
+              <input
+                id="image-link-input"
+                type="url"
+                class="modal__input"
+                placeholder="Paste a link to the picture"
+              />
+            </label>
+            <label for="caption" class="modal__label"
+              >Caption
+              <input
+                id="caption-input"
+                type="text"
+                class="modal__input"
+                placeholder="Type your caption"
               />
             </label>
             <button type="submit" class="modal__submit-btn">Save</button>
