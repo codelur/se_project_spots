@@ -10,11 +10,15 @@
   align-items: center;
   justify-content: center;
   visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.5s linear;
   padding: 0 20px;
 }
 
 .modal_opened {
   visibility: visible;
+  opacity: 1;
+  transition: opacity 1s linear;
 }
 
 .modal__container {
@@ -85,6 +89,49 @@
   font-weight: 500;
 }
 
+.modal__preview-image {
+  max-width: 80vh;
+  max-height: 80vh;
+  border-radius: 4px;
+  width: calc(100% - 52.5px);
+  object-fit: content;
+}
+
+.modal__content {
+  position: relative;
+}
+
+.modal__preview-image-close-btn {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  background-image: url(../images/closepreview.svg);
+  background-color: white;
+  background-color: transparent;
+  transition: opacity 0.5s linear;
+  position: absolute;
+  margin-left: 12.5px;
+  cursor: pointer;
+}
+
+.modal__preview-image-close-btn:hover {
+  opacity: 0.4;
+}
+
+.modal__preview-image-title {
+  margin-top: 8px;
+  padding: 4px 8px;
+  font-family: Poppins;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.2;
+  color: white;
+  background-color: #212121;
+  border-radius: 8px;
+  width: fit-content;
+}
+
 @media screen and (max-width: 627px) {
   .modal {
     padding: 0 10px;
@@ -109,5 +156,13 @@
   .modal__input {
     font-size: 16px;
     line-height: 1;
+  }
+  .profile__add-card-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .modal__preview-image {
+    max-width: 80vh;
+    max-height: 80vh;
   }
 }

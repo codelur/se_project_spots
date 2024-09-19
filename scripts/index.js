@@ -52,6 +52,11 @@ const addCardButton = document.querySelector("#profile__add-card-btn");
 const newCardmageLinkInput = addCardModal.querySelector("#image-link-input");
 const newCardCaptionInput = addCardModal.querySelector("#caption-input");
 
+const previewImageModal = document.querySelector("#preview-image-modal");
+const closepreviewImageButton = document.querySelector(
+  "#modal__preview-image-close-btn"
+);
+
 initialCards.forEach(function (card) {
   const cardNode = createCardElement(card.link, card.name);
   cardsList.prepend(cardNode);
@@ -61,12 +66,35 @@ function createCardElement(link, name) {
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
 
   const cardImgElement = cardElement.querySelector(".card__image");
+  cardImgElement.addEventListener("click", () => {
+    const previewImage = previewImageModal.querySelector(
+      ".modal__preview-image"
+    );
+    previewImage.src = link;
+    previewImage.alt = name;
+
+    const previewImageTitle = previewImageModal.querySelector(
+      ".modal__preview-image-title"
+    );
+    previewImageTitle.textContent = name;
+    openModal(previewImageModal);
+  });
+
   cardImgElement.src = link;
   cardImgElement.alt = name;
 
   const cardTitleElement = cardElement.querySelector(
     ".card__content .card__title"
   );
+
+  const cardLikeButton = cardElement.querySelector(".card__like-button");
+  cardLikeButton.addEventListener("click", () => {
+    cardLikeButton.classList.add("card__like-button-liked");
+  });
+  const cardDeleteButton = cardElement.querySelector(".card__delete-button");
+  cardDeleteButton.addEventListener("click", () => {
+    cardDeleteButton.closest(".card").remove();
+  });
   cardTitleElement.textContent = name;
 
   return cardElement;
@@ -114,6 +142,10 @@ closeEditProfileButton.addEventListener("click", () => {
 });
 closeAddCardButton.addEventListener("click", () => {
   closeModal(addCardModal);
+});
+
+closepreviewImageButton.addEventListener("click", () => {
+  closeModal(previewImageModal);
 });
 //Add this eventListener to the form instead of the button
 submitProfileForm.addEventListener("submit", handleProfileFormSubmit);

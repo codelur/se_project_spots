@@ -48,6 +48,7 @@
             <template id="card__template">
               <li class="card">
                 <img class="card__image" />
+                <button type="button" class="card__delete-button"></button>
                 <div class="card__content">
                   <h2 class="card__title"></h2>
                   <button type="button" class="card__like-button"></button>
@@ -63,7 +64,7 @@
       <div class="modal" id="edit-profile-modal">
         <div class="modal__container">
           <button
-            type="submit"
+            type="button"
             id="modal__edit-profile-close-btn"
             class="modal__close-btn"
           ></button>
@@ -124,6 +125,17 @@
             </label>
             <button type="submit" class="modal__submit-btn">Save</button>
           </form>
+        </div>
+      </div>
+      <div class="modal preview-image-modal" id="preview-image-modal">
+        <div class="modal__content">
+          <img src="" alt="" class="modal__preview-image" />
+          <button
+            type="button"
+            id="modal__preview-image-close-btn"
+            class="modal__preview-image-close-btn"
+          ></button>
+          <h2 class="modal__preview-image-title"></h2>
         </div>
       </div>
     </div>
