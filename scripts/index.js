@@ -52,7 +52,7 @@ const addCardButton = document.querySelector("#profile__add-card-btn");
 const newCardmageLinkInput = addCardModal.querySelector("#image-link-input");
 const newCardCaptionInput = addCardModal.querySelector("#caption-input");
 
-const previewImageModal = document.querySelector("#preview-image-modal");
+const previewImageModal = document.querySelector("#modal-preview-image");
 const closepreviewImageButton = document.querySelector(
   "#modal__preview-image-close-btn"
 );
