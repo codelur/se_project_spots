@@ -175,5 +175,6 @@
     position: relative;
     display: block;
     margin-left: auto;
+    margin-bottom: 8px;
   }
 }
