@@ -11,14 +11,13 @@
   justify-content: center;
   visibility: hidden;
   opacity: 0;
-  transition: opacity 0.5s linear;
+  transition: opacity 0.5s linear, visibility 0.3s ease;
   padding: 0 20px;
 }
 
 .modal_opened {
   visibility: visible;
   opacity: 1;
-  transition: opacity 1s linear;
 }
 
 .modal__container {
@@ -113,6 +112,7 @@
   position: absolute;
   margin-left: 12.5px;
   cursor: pointer;
+  right: 0;
 }
 
 .modal__preview-image-close-btn:hover {
@@ -164,5 +164,16 @@
   .modal__preview-image {
     max-width: 80vh;
     max-height: 80vh;
+  }
+  .modal-preview-image {
+    padding: 0 16px;
+  }
+  .modal__preview-image {
+    width: calc(100%);
+  }
+  .modal__preview-image-close-btn {
+    position: relative;
+    display: block;
+    margin-left: auto;
   }
 }

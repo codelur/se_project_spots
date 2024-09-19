@@ -89,7 +89,7 @@ function createCardElement(link, name) {
 
   const cardLikeButton = cardElement.querySelector(".card__like-button");
   cardLikeButton.addEventListener("click", () => {
-    cardLikeButton.classList.add("card__like-button-liked");
+    cardLikeButton.classList.toggle("card__like-button-liked");
   });
   const cardDeleteButton = cardElement.querySelector(".card__delete-button");
   cardDeleteButton.addEventListener("click", () => {

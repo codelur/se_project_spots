@@ -75,7 +75,7 @@
 }
 
 .card__like-button-liked:hover {
-  opacity: 40%;
+  background-image: url(../images/heartt.svg);
 }
 
 @media screen and (max-width: 627px) {
