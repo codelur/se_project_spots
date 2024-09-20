@@ -53,13 +53,21 @@ const newCardmageLinkInput = addCardModal.querySelector("#image-link-input");
 const newCardCaptionInput = addCardModal.querySelector("#caption-input");
 
 const previewImageModal = document.querySelector("#modal-preview-image");
+const previewImage = previewImageModal.querySelector(".modal__preview-image");
+const previewImageTitle = previewImageModal.querySelector(
+  ".modal__preview-image-title"
+);
 const closepreviewImageButton = document.querySelector(
   "#modal__preview-image-close-btn"
 );
 
+function renderCard(cardNode, method = "prepend") {
+  cardsList[method](cardNode);
+}
+
 initialCards.forEach(function (card) {
   const cardNode = createCardElement(card.link, card.name);
-  cardsList.prepend(cardNode);
+  renderCard(cardNode);
 });
 
 function createCardElement(link, name) {
@@ -67,15 +75,9 @@ function createCardElement(link, name) {
 
   const cardImgElement = cardElement.querySelector(".card__image");
   cardImgElement.addEventListener("click", () => {
-    const previewImage = previewImageModal.querySelector(
-      ".modal__preview-image"
-    );
     previewImage.src = link;
     previewImage.alt = name;
 
-    const previewImageTitle = previewImageModal.querySelector(
-      ".modal__preview-image-title"
-    );
     previewImageTitle.textContent = name;
     openModal(previewImageModal);
   });
@@ -121,7 +123,8 @@ function handleAddCardFormSubmit(evt) {
     newCardmageLinkInput.value,
     newCardCaptionInput.value
   );
-  cardsList.prepend(cardNode);
+
+  renderCard(cardNode);
   newCardmageLinkInput.value = "";
   newCardCaptionInput.value = "";
   closeModal(addCardModal);

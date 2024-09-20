@@ -105,6 +105,7 @@
   height: 40px;
   padding: 0;
   border: 0;
+  top: 0;
   background-image: url(../images/closepreview.svg);
   background-color: white;
   background-color: transparent;
@@ -176,5 +177,7 @@
     display: block;
     margin-left: auto;
     margin-bottom: 8px;
+    top: 0;
+    right: 0;
   }
 }
