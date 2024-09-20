@@ -95,7 +95,7 @@ function createCardElement(link, name) {
   });
   const cardDeleteButton = cardElement.querySelector(".card__delete-button");
   cardDeleteButton.addEventListener("click", () => {
-    cardDeleteButton.closest(".card").remove();
+    cardElement.remove();
   });
   cardTitleElement.textContent = name;
 
