@@ -33,6 +33,7 @@ const profileNameElement =
 const profileJobElement = profileSectionElement.querySelector(
   "#profile__description"
 );
+const modals = Array.from(document.querySelectorAll(".modal"));
 
 //Edit Profile Elements
 const editProfileModal = document.querySelector("#edit-profile-modal");
@@ -102,12 +103,22 @@ function createCardElement(link, name) {
   return cardElement;
 }
 
+const escapeModal = (evt) => {
+  if (evt.key === "Escape") {
+    modals.forEach((modal) => {
+      if (modal.classList.contains("modal_opened")) closeModal(modal);
+    });
+  }
+};
+
 function openModal(modal) {
   modal.classList.add("modal_opened");
+  document.addEventListener("keydown", escapeModal);
 }
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
+  document.removeEventListener("keydown", escapeModal);
 }
 
 function handleProfileFormSubmit(evt) {
@@ -153,3 +164,9 @@ closepreviewImageButton.addEventListener("click", () => {
 //Add this eventListener to the form instead of the button
 submitProfileForm.addEventListener("submit", handleProfileFormSubmit);
 submitAddCardForm.addEventListener("submit", handleAddCardFormSubmit);
+
+modals.forEach((modal) => {
+  modal.addEventListener("click", (evt) => {
+    if (evt.target.classList.contains("modal_opened")) closeModal(evt.target);
+  });
+});

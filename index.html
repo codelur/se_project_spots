@@ -73,6 +73,7 @@
             name="edit-profile"
             class="modal__form"
             id="modal__form-edit-profile"
+            novalidate
           >
             <label for="name" class="modal__label"
               >Name
@@ -81,7 +82,11 @@
                 type="text"
                 class="modal__input"
                 placeholder="Type your name"
+                minlength="2"
+                maxlength="40"
+                required
               />
+              <span class="modal-error name-error"></span>
             </label>
             <label for="description" class="modal__label"
               >Description
@@ -90,9 +95,15 @@
                 type="text"
                 class="modal__input"
                 placeholder="Describe yourself"
+                minlength="2"
+                maxlength="200"
+                required
               />
+              <span class="modal-error description-error"></span>
             </label>
-            <button type="submit" class="modal__submit-btn">Save</button>
+            <button type="submit" class="modal__submit-btn modal__button">
+              Save
+            </button>
           </form>
         </div>
       </div>
@@ -104,7 +115,12 @@
             class="modal__close-btn"
           ></button>
           <h2 class="modal__title">New Post</h2>
-          <form name="add-card" class="modal__form" id="modal__form-add-card">
+          <form
+            name="add-card"
+            class="modal__form"
+            id="modal__form-add-card"
+            novalidate
+          >
             <label for="image-link" class="modal__label"
               >Image Link
               <input
@@ -112,7 +128,9 @@
                 type="url"
                 class="modal__input"
                 placeholder="Paste a link to the picture"
+                required
               />
+              <span class="modal-error image-link-input-error"></span>
             </label>
             <label for="caption" class="modal__label"
               >Caption
@@ -121,9 +139,15 @@
                 type="text"
                 class="modal__input"
                 placeholder="Type your caption"
+                minlength="2"
+                maxlength="30"
+                required
               />
+              <span class="modal-error caption-input-error"></span>
             </label>
-            <button type="submit" class="modal__submit-btn">Save</button>
+            <button type="submit" class="modal__submit-btn modal__button">
+              Save
+            </button>
           </form>
         </div>
       </div>
@@ -140,5 +164,6 @@
       </div>
     </div>
     <script src="./scripts/index.js"></script>
+    <script src="./scripts/validation.js"></script>
   </body>
 </html>
