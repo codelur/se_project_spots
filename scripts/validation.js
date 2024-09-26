@@ -40,13 +40,21 @@ const hasInvalidInput = (inputList) => {
   });
 };
 
+const disableButton = (buttonElement) => {
+  buttonElement.classList.add(settings.inactiveButtonClass);
+  buttonElement.disabled = true;
+};
+
+const enableButton = (buttonElement) => {
+  buttonElement.classList.remove(settings.inactiveButtonClass);
+  buttonElement.disabled = false;
+};
+
 const toggleButtonState = (inputList, buttonElement) => {
   if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add(settings.inactiveButtonClass);
-    buttonElement.disabled = true;
+    disableButton(buttonElement);
   } else {
-    buttonElement.classList.remove(settings.inactiveButtonClass);
-    buttonElement.disabled = false;
+    enableButton(buttonElement);
   }
 };
 
