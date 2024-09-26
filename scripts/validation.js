@@ -14,12 +14,18 @@ function showInputError(formElement, inputElement, errorMessage, settings) {
   errorElement.classList.add(settings.errorClass);
 }
 
-function hideInputError(formElement, inputElement, settings) {
+function hideInputError(formElement, inputElement, settings = settings) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.remove(settings.inputErrorClass);
   errorElement.textContent = "";
   errorElement.classList.remove(settings.errorClass);
 }
+
+const resetValidation = (formElement, inputList) => {
+  inputList.forEach((inputElement) => {
+    hideInputError(formElement, inputElement, settings);
+  });
+};
 
 const checkInputValidity = (formElement, inputElement, settings) => {
   if (!inputElement.validity.valid) {

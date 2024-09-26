@@ -146,6 +146,7 @@ function handleAddCardFormSubmit(evt) {
 editProfileButton.addEventListener("click", () => {
   nameInput.value = profileNameElement.textContent;
   jobInput.value = profileJobElement.textContent.trim();
+  resetValidation(submitProfileForm, [nameInput, jobInput]);
   enableButton(profileSubmitBtn);
   openModal(editProfileModal);
 });
@@ -169,7 +170,7 @@ submitProfileForm.addEventListener("submit", handleProfileFormSubmit);
 submitAddCardForm.addEventListener("submit", handleAddCardFormSubmit);
 
 modals.forEach((modal) => {
-  modal.addEventListener("click", (evt) => {
+  modal.addEventListener("mousedown", (evt) => {
     if (evt.target.classList.contains("modal_opened")) closeModal(evt.target);
   });
 });
