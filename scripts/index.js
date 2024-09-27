@@ -139,7 +139,7 @@ function handleAddCardFormSubmit(evt) {
 
   renderCard(cardNode);
   evt.target.reset();
-  disableButton(cardSubmitBtn);
+  disableButton(cardSubmitBtn, settings);
   closeModal(addCardModal);
 }
 
@@ -147,7 +147,7 @@ editProfileButton.addEventListener("click", () => {
   nameInput.value = profileNameElement.textContent;
   jobInput.value = profileJobElement.textContent.trim();
   resetValidation(submitProfileForm, [nameInput, jobInput]);
-  enableButton(profileSubmitBtn);
+  enableButton(profileSubmitBtn, settings);
   openModal(editProfileModal);
 });
 
