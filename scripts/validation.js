@@ -46,21 +46,21 @@ const hasInvalidInput = (inputList) => {
   });
 };
 
-const disableButton = (buttonElement) => {
+const disableButton = (buttonElement, settings) => {
   buttonElement.classList.add(settings.inactiveButtonClass);
   buttonElement.disabled = true;
 };
 
-const enableButton = (buttonElement) => {
+const enableButton = (buttonElement, settings) => {
   buttonElement.classList.remove(settings.inactiveButtonClass);
   buttonElement.disabled = false;
 };
 
-const toggleButtonState = (inputList, buttonElement) => {
+const toggleButtonState = (inputList, buttonElement, settings) => {
   if (hasInvalidInput(inputList)) {
-    disableButton(buttonElement);
+    disableButton(buttonElement, settings);
   } else {
-    enableButton(buttonElement);
+    enableButton(buttonElement, settings);
   }
 };
 
@@ -71,11 +71,11 @@ function setEventListeners(formElement, settings) {
   const buttonElement = formElement.querySelector(
     settings.submitButtonSelector
   );
-  toggleButtonState(inputList, buttonElement);
+  toggleButtonState(inputList, buttonElement, settings);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", function () {
       checkInputValidity(formElement, inputElement, settings);
-      toggleButtonState(inputList, buttonElement);
+      toggleButtonState(inputList, buttonElement, settings);
     });
   });
 }
