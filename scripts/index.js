@@ -147,7 +147,7 @@ editProfileButton.addEventListener("click", () => {
   nameInput.value = profileNameElement.textContent;
   jobInput.value = profileJobElement.textContent.trim();
   resetValidation(submitProfileForm, [nameInput, jobInput]);
-  enableButton(profileSubmitBtn, settings);
+  enableButton(profileSubmitBtn);
   openModal(editProfileModal);
 });
 
