@@ -12,6 +12,7 @@ Video description: https://drive.google.com/file/d/1Zsg1AKEOoSQWthCkEDXmkKC9A5HO
 
 - **User Interactions**:
   - Add and remove photos.
+  - Interaction with other users.
   - Like photos uploaded by others.
   - Customize user profile settings.
 - **Responsive Design**:
