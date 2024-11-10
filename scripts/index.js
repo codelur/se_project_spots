@@ -1,3 +1,11 @@
+import {
+  enableValidation,
+  settings,
+  disableButton,
+  resetValidation,
+  enableButton,
+} from "./validation.js";
+
 const initialCards = [
   {
     name: "Desert Castle",
@@ -174,3 +182,5 @@ modals.forEach((modal) => {
     if (evt.target.classList.contains("modal_opened")) closeModal(evt.target);
   });
 });
+
+enableValidation(settings);

@@ -1,4 +1,4 @@
-const settings = {
+export const settings = {
   formSelector: ".modal__form",
   inputSelector: ".modal__input",
   submitButtonSelector: ".modal__button",
@@ -21,7 +21,7 @@ function hideInputError(formElement, inputElement, settings = settings) {
   errorElement.classList.remove(settings.errorClass);
 }
 
-const resetValidation = (formElement, inputList) => {
+export const resetValidation = (formElement, inputList) => {
   inputList.forEach((inputElement) => {
     hideInputError(formElement, inputElement, settings);
   });
@@ -46,12 +46,12 @@ const hasInvalidInput = (inputList) => {
   });
 };
 
-const disableButton = (buttonElement, settings) => {
+export const disableButton = (buttonElement, settings) => {
   buttonElement.classList.add(settings.inactiveButtonClass);
   buttonElement.disabled = true;
 };
 
-const enableButton = (buttonElement, settings) => {
+export const enableButton = (buttonElement, settings) => {
   buttonElement.classList.remove(settings.inactiveButtonClass);
   buttonElement.disabled = false;
 };
@@ -80,7 +80,7 @@ function setEventListeners(formElement, settings) {
   });
 }
 
-const enableValidation = (settings) => {
+export const enableValidation = (settings) => {
   const formList = Array.from(document.querySelectorAll(settings.formSelector));
   formList.forEach((formElement) => {
     formElement.addEventListener("submit", (evt) => {
@@ -89,5 +89,3 @@ const enableValidation = (settings) => {
     setEventListeners(formElement, settings);
   });
 };
-
-enableValidation(settings);
