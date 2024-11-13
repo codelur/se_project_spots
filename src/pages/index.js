@@ -1,5 +1,6 @@
 import "./index.css";
 import Api from "../utils/Api.js";
+import { setButtonText } from "../utils/helpers.js";
 import {
   enableValidation,
   settings,
@@ -46,6 +47,8 @@ const profileJobElement = profileSectionElement.querySelector(
 );
 const modals = Array.from(document.querySelectorAll(".modal"));
 
+//Modals
+
 //Edit Profile Elements
 const editProfileModal = document.querySelector("#edit-profile-modal");
 const submitProfileForm = document.forms["modal__form-edit-profile"];
@@ -62,20 +65,25 @@ const addCardModal = document.querySelector("#add-card-modal");
 const closeAddCardButton = document.querySelector("#modal__add-card-close-btn");
 const submitAddCardForm = document.forms["modal__form-add-card"];
 const submitEditAvatarForm = document.forms["edit-avatar-form"];
-const deleteCardForm = document.forms["delete-form"];
+
 const addCardButton = document.querySelector("#profile__add-card-btn");
 const avatarModalButton = document.querySelector(".profile__avatar-btn");
 const avatarModal = document.querySelector("#edit-avatar-modal");
-const deleteModal = document.querySelector("#delete-modal");
+
 const newCardmageLinkInput = addCardModal.querySelector("#image-link-input");
 const newCardCaptionInput = addCardModal.querySelector("#caption-input");
 const cardSubmitBtn = addCardModal.querySelector(".modal__button");
 const profileAvatarInput = submitEditAvatarForm.querySelector(
   "#profile-avatar-input"
 );
+
+//Delete card Elements
+const deleteCardForm = document.forms["delete-form"];
 const cancelDeleteBtn = deleteCardForm.querySelector(".modal__button-cancel");
 const modalCancelDeleteBtn = document.querySelector(".modal__delete-close-btn");
+const deleteModal = document.querySelector("#delete-modal");
 
+//Preview Image elements
 const previewImageModal = document.querySelector("#modal-preview-image");
 const previewImage = previewImageModal.querySelector(".modal__preview-image");
 const previewImageTitle = previewImageModal.querySelector(
@@ -140,16 +148,6 @@ function createCardElement(data) {
   return cardElement;
 }
 
-function handleDeleteSubmit() {
-  api
-    .removeCard(selectedCardId) // pass the ID the the api function
-    .then(() => {
-      selectedCard.remove();
-      closeModal(deleteModal);
-    })
-    .catch(console.error);
-}
-
 const escapeModal = (evt) => {
   if (evt.key === "Escape") {
     modals.forEach((modal) => {
@@ -170,6 +168,7 @@ function closeModal(modal) {
 
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
+  setButtonText(evt.submitter, true);
   api
     .editUserInfo({ name: nameInput.value, about: jobInput.value })
     .then((data) => {
@@ -177,11 +176,13 @@ function handleProfileFormSubmit(evt) {
       profileJobElement.textContent = data.about;
       closeModal(editProfileModal);
     })
-    .catch(console.error);
+    .catch(console.error)
+    .finally(() => setButtonText(evt.submitter, false));
 }
 
 function handleAddCardFormSubmit(evt) {
   evt.preventDefault();
+  setButtonText(evt.submitter, true);
   api
     .addCard({
       name: newCardCaptionInput.value,
@@ -194,18 +195,33 @@ function handleAddCardFormSubmit(evt) {
       disableButton(cardSubmitBtn, settings);
       closeModal(addCardModal);
     })
-    .catch(console.error);
+    .catch(console.error)
+    .finally(() => setButtonText(evt.submitter, false));
 }
 
 function handleEditAvatarFormSubmit(evt) {
   evt.preventDefault();
+  setButtonText(evt.submitter, true);
   api
     .editAvatarInfo(profileAvatarInput.value)
     .then((data) => {
       profileAvatar.src = data.avatar;
       closeModal(avatarModal);
     })
-    .catch(console.error);
+    .catch(console.error)
+    .finally(() => setButtonText(evt.submitter, false));
+}
+
+function handleDeleteSubmit(evt) {
+  setButtonText(evt.submitter, true, "Delete", "Deleting...");
+  api
+    .removeCard(selectedCardId) // pass the ID the the api function
+    .then(() => {
+      selectedCard.remove();
+      closeModal(deleteModal);
+    })
+    .catch(console.error)
+    .finally(() => setButtonText(evt.submitter, true, "Delete", "Deleting..."));
 }
 
 editProfileButton.addEventListener("click", () => {
