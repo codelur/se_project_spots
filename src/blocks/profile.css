@@ -27,7 +27,7 @@
 
 .profile__avatar-container:hover .profile__avatar-btn {
   visibility: visible;
-  opacity: 0.4;
+  opacity: 0.6;
 }
 
 .profile__avatar-btn::after {

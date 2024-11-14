@@ -55,14 +55,10 @@ const submitProfileForm = document.forms["modal__form-edit-profile"];
 const nameInput = editProfileModal.querySelector("#name");
 const jobInput = editProfileModal.querySelector("#description");
 const editProfileButton = document.querySelector("#profile__edit-btn");
-const closeEditProfileButton = document.querySelector(
-  "#modal__edit-profile-close-btn"
-);
 const profileSubmitBtn = editProfileModal.querySelector(".modal__button");
 
 //Add Card elements
 const addCardModal = document.querySelector("#add-card-modal");
-const closeAddCardButton = document.querySelector("#modal__add-card-close-btn");
 const submitAddCardForm = document.forms["modal__form-add-card"];
 const submitEditAvatarForm = document.forms["edit-avatar-form"];
 
@@ -80,7 +76,6 @@ const profileAvatarInput = submitEditAvatarForm.querySelector(
 //Delete card Elements
 const deleteCardForm = document.forms["delete-form"];
 const cancelDeleteBtn = deleteCardForm.querySelector(".modal__button-cancel");
-const modalCancelDeleteBtn = document.querySelector(".modal__delete-close-btn");
 const deleteModal = document.querySelector("#delete-modal");
 
 //Preview Image elements
@@ -88,12 +83,6 @@ const previewImageModal = document.querySelector("#modal-preview-image");
 const previewImage = previewImageModal.querySelector(".modal__preview-image");
 const previewImageTitle = previewImageModal.querySelector(
   ".modal__preview-image-title"
-);
-const closepreviewImageButton = document.querySelector(
-  "#modal__preview-image-close-btn"
-);
-const closeEditAvatarButton = document.querySelector(
-  "#modal__edit-avatar-close-btn"
 );
 
 function renderCard(cardNode, method = "prepend") {
@@ -166,62 +155,65 @@ function closeModal(modal) {
   document.removeEventListener("keydown", escapeModal);
 }
 
-function handleProfileFormSubmit(evt) {
+function handleSubmit(request, evt, loadingText = "Saving...") {
   evt.preventDefault();
-  setButtonText(evt.submitter, true);
-  api
-    .editUserInfo({ name: nameInput.value, about: jobInput.value })
-    .then((data) => {
-      profileNameElement.textContent = data.name;
-      profileJobElement.textContent = data.about;
-      closeModal(editProfileModal);
+  const submitButton = evt.submitter;
+  const initialText = submitButton.textContent;
+  setButtonText(submitButton, true, initialText, loadingText);
+  request()
+    .then(() => {
+      evt.target.reset();
     })
     .catch(console.error)
-    .finally(() => setButtonText(evt.submitter, false));
+    .finally(() => {
+      setButtonText(submitButton, false, initialText);
+    });
+}
+
+function handleProfileFormSubmit(evt) {
+  async function makeRequest() {
+    const data = await api.editUserInfo({
+      name: nameInput.value,
+      about: jobInput.value,
+    });
+    profileNameElement.textContent = data.name;
+    profileJobElement.textContent = data.about;
+    closeModal(editProfileModal);
+  }
+  handleSubmit(makeRequest, evt);
 }
 
 function handleAddCardFormSubmit(evt) {
-  evt.preventDefault();
-  setButtonText(evt.submitter, true);
-  api
-    .addCard({
+  async function makeRequest() {
+    const data = await api.addCard({
       name: newCardCaptionInput.value,
       link: newCardmageLinkInput.value,
-    })
-    .then((data) => {
-      const cardNode = createCardElement(data);
-      renderCard(cardNode);
-      evt.target.reset();
-      disableButton(cardSubmitBtn, settings);
-      closeModal(addCardModal);
-    })
-    .catch(console.error)
-    .finally(() => setButtonText(evt.submitter, false));
+    });
+    const cardNode = createCardElement(data);
+    renderCard(cardNode);
+    evt.target.reset();
+    disableButton(cardSubmitBtn, settings);
+    closeModal(addCardModal);
+  }
+  handleSubmit(makeRequest, evt);
 }
 
 function handleEditAvatarFormSubmit(evt) {
-  evt.preventDefault();
-  setButtonText(evt.submitter, true);
-  api
-    .editAvatarInfo(profileAvatarInput.value)
-    .then((data) => {
-      profileAvatar.src = data.avatar;
-      closeModal(avatarModal);
-    })
-    .catch(console.error)
-    .finally(() => setButtonText(evt.submitter, false));
+  async function makeRequest() {
+    const data = await api.editAvatarInfo(profileAvatarInput.value);
+    profileAvatar.src = data.avatar;
+    closeModal(avatarModal);
+  }
+  handleSubmit(makeRequest, evt);
 }
 
 function handleDeleteSubmit(evt) {
-  setButtonText(evt.submitter, true, "Delete", "Deleting...");
-  api
-    .removeCard(selectedCardId) // pass the ID the the api function
-    .then(() => {
-      selectedCard.remove();
-      closeModal(deleteModal);
-    })
-    .catch(console.error)
-    .finally(() => setButtonText(evt.submitter, true, "Delete", "Deleting..."));
+  async function makeRequest() {
+    await api.removeCard(selectedCardId); // pass the ID the the api function
+    selectedCard.remove();
+    closeModal(deleteModal);
+  }
+  handleSubmit(makeRequest, evt, "Deleting...");
 }
 
 editProfileButton.addEventListener("click", () => {
@@ -236,29 +228,17 @@ addCardButton.addEventListener("click", () => {
   openModal(addCardModal);
 });
 
-closeEditProfileButton.addEventListener("click", () => {
-  closeModal(editProfileModal);
-});
-closeAddCardButton.addEventListener("click", () => {
-  closeModal(addCardModal);
-});
-
 avatarModalButton.addEventListener("click", () => {
   openModal(avatarModal);
 });
 
-closepreviewImageButton.addEventListener("click", () => {
-  closeModal(previewImageModal);
-});
-
-closeEditAvatarButton.addEventListener("click", () => {
-  closeModal(avatarModal);
+const closeButtons = document.querySelectorAll(".modal__close-btn");
+closeButtons.forEach((button) => {
+  const popup = button.closest(".modal");
+  button.addEventListener("click", () => closeModal(popup));
 });
 
 cancelDeleteBtn.addEventListener("click", () => {
-  closeModal(deleteModal);
-});
-modalCancelDeleteBtn.addEventListener("click", () => {
   closeModal(deleteModal);
 });
 
