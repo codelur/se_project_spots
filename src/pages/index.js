@@ -232,8 +232,8 @@ avatarModalButton.addEventListener("click", () => {
   openModal(avatarModal);
 });
 
-const closeButtons = document.querySelectorAll(".modal__close-btn");
-closeButtons.forEach((button) => {
+const closeModalButtons = document.querySelectorAll(".modal__close-btn");
+closeModalButtons.forEach((button) => {
   const popup = button.closest(".modal");
   button.addEventListener("click", () => closeModal(popup));
 });
